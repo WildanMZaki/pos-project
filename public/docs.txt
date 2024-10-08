@@ -1,1 +1,3 @@
 Ini adalah project POS oleh Wildan
+
+Project pos ini dibuat dengan framework laravel
