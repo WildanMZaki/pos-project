@@ -9,6 +9,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        echo "ini adalah halaman login";
+        return view('auth.login');
     }
 }
