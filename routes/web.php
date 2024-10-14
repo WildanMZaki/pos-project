@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/testing', [DashboardController::class, 'test'])->name('testing');
+Route::get('/admin', [DashboardController::class, 'template'])->name('adminlte');
 
 Route::get('/', function () {
     return view('welcome');

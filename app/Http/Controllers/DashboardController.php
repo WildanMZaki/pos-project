@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index() {
-        return view('dashboard');
+        $data['title'] = 'Dashboard';
+        return view('dashboard', $data);
     }
 
-    public function test() {
-        echo 'ini di controller: DashboardController, di method/function: test';
+    public function template() {
+        return view('layouts.adminlte');
     }
 }

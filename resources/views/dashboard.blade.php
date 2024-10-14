@@ -1,1 +1,5 @@
-<button>Ini halaman dashboard</button>
+@extends('layouts.master')
+
+@section('content')
+    <img src="{{ asset('images/cat.png') }}" alt="">
+@endsection
