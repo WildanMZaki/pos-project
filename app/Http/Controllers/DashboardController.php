@@ -13,6 +13,6 @@ class DashboardController extends Controller
     }
 
     public function template() {
-        return view('layouts.adminlte');
+        return view('menu.home');
     }
 }
