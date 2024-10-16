@@ -28,7 +28,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">DAFTAR MENU</li>
         <li>
-          <a href="{{ url('/admin') }}">
+          <a href="{{ route('home') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>

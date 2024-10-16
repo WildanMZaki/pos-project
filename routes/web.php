@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/admin', [DashboardController::class, 'template'])->name('home');
+Route::get('/dash', [DashboardController::class, 'template'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 Route::get('/', function () {
