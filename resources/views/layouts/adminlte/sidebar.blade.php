@@ -53,7 +53,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ url('/') }}">
+          <a href="{{ route('petugas.list') }}">
             <i class="fa fa-dashboard"></i> <span>Master Petugas</span>
           </a>
         </li>
