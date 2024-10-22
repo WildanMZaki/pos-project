@@ -11,7 +11,27 @@ class PetugasController extends Controller
     // menampilkan daftar petugas
     public function index()
     {
-        return view('menu.petugas.index');
+        # variasi 1
+        // $list_petugas = User::all();
+
+        # variasi 2
+        $list_petugas = User::orderBy('id', 'DESC')->get();
+
+        // Gambaran isi dari variabel $list_petugas
+        // $list_petugas = [
+        //     (object) [
+        //         'fullname' => 'Nurul',
+        //         'email' => 'nurul@nurul.com',
+        //         'active' => 1,
+        //     ],
+        //     (object) [
+        //         'fullname' => 'Cahya',
+        //         'email' => 'cahya@cahya.com',
+        //         'active' => 0,
+        //     ],
+        // ];
+        $data['list_petugas'] = $list_petugas;
+        return view('menu.petugas.index', $data);
     }
 
     // menampilkan halaman formulir untuk tambah petugas

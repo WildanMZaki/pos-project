@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
   @includeIf('layouts.adminlte.styles')
+  @stack('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -15,7 +16,6 @@
   @includeIf('layouts.adminlte.header')
   
   @includeIf('layouts.adminlte.sidebar')
-  @stack('css')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

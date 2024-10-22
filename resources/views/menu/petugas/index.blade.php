@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 
 @push('css')
-    
+<link rel="stylesheet" href="{{ asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 @endpush
 
 @section('content')
@@ -33,6 +33,44 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     {{-- Nanti di sini akan dibuat tabel --}}
+                    <table class="table table-striped table-responsive" id="tabel-petugas">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($list_petugas as $index => $petugas)
+                                <tr>
+                                    <td>{{ $index + 1 }}.</td>
+                                    <td>{{ $petugas->fullname }}</td>
+                                    <td>{{ $petugas->email }}</td>
+                                    <td>
+                                        @if ($petugas->active == 1)
+                                            <small class="label bg-green">Aktif</small>
+                                        @else
+                                            <small class="label bg-red">Inaktif</small>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-secondary">
+                                            <i class="fa fa-eye-slash"></i>
+                                        </button>
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -41,5 +79,27 @@
 @endsection
 
 @push('js')
-    
+<script src="{{ asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script>
+    $('#tabel-petugas').DataTable({
+        language: {
+            sProcessing: "Sedang memproses...",
+            sLengthMenu: "Tampilkan _MENU_ data",
+            sZeroRecords: "Tidak ditemukan data yang sesuai",
+            sInfo: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            sInfoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+            sInfoFiltered: "(disaring dari _MAX_ data keseluruhan)",
+            sInfoPostFix: "",
+            sSearch: "Cari:",
+            sUrl: "",
+            oPaginate: {
+                sFirst: "Pertama",
+                sPrevious: "Sebelumnya",
+                sNext: "Selanjutnya",
+                sLast: "Terakhir"
+            }
+        }
+    });
+</script>
 @endpush
