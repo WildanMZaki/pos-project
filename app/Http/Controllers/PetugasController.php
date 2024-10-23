@@ -15,7 +15,7 @@ class PetugasController extends Controller
         // $list_petugas = User::all();
 
         # variasi 2
-        $list_petugas = User::orderBy('id', 'DESC')->get();
+        $list_petugas = User::orderBy('id', 'DESC')->get(); // : [(object), ...]
 
         // Gambaran isi dari variabel $list_petugas
         // $list_petugas = [
@@ -32,6 +32,13 @@ class PetugasController extends Controller
         // ];
         $data['list_petugas'] = $list_petugas;
         return view('menu.petugas.index', $data);
+    }
+
+    public function test($name, $age)
+    {
+        echo $name;
+        echo "<br/>";
+        echo $age;
     }
 
     // menampilkan halaman formulir untuk tambah petugas
@@ -60,5 +67,21 @@ class PetugasController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    // fungsi untuk menghapus data dari database : ?id=2
+    public function delete($petugas_id)
+    {
+        $petugas = User::find($petugas_id);
+
+        // Variasi 2:
+        // $petugas = User::where('id', $petugas_id)->first();
+
+        if (empty($petugas)) {
+            abort(404);
+        }
+
+        $petugas->delete();
+        return redirect('/petugas');
     }
 }

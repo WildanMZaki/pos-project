@@ -63,9 +63,13 @@
                                         <button class="btn btn-secondary">
                                             <i class="fa fa-eye-slash"></i>
                                         </button>
-                                        <button class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        <form action="{{ route('petugas.delete', $petugas->id) }}" method="post" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
