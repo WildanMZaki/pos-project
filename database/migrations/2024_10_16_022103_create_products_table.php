@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
+            $table->string('photo')->nullable();
             $table->string('category');
             $table->string('unit')->comment('(satuan)');
             $table->integer('price')->default(0);

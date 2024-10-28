@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Foto</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -47,6 +48,9 @@
                             @foreach ($list_petugas as $index => $petugas)
                                 <tr>
                                     <td>{{ $index + 1 }}.</td>
+                                    <td>
+                                        <img src="{{ $petugas->avatar ? asset("storage/" . $petugas->avatar) : asset('images/defaults/poto.jpeg') }}" alt="Foto {{ $petugas->fullname }}" class="img-fluid" style="max-height: 50px;">
+                                    </td>
                                     <td>{{ $petugas->fullname }}</td>
                                     <td>{{ $petugas->email }}</td>
                                     <td>

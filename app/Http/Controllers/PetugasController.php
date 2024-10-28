@@ -50,16 +50,39 @@ class PetugasController extends Controller
     // fungsi untuk memproses data dari formulir dan menyimpan ke database
     public function store(Request $request)
     {
+        # Form Validation
+        // Rules + Message (opsional)
+        // Beberapa aturan lain yang sering digunakan: numeric
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email_petugas' => 'required|email|min:5',
+            'kata_sandi' => 'required|min:8',
+            'avatar' => 'mimes:jpg,png,jpeg|max:5000',
+        ], [
+            'nama_lengkap.required' => 'Kolom nama lengkap harus diisi',
+            'nama_lengkap.max' => 'Kolom nama lengkap tidak boleh lebih panjang dari 255 karakter',
+            'email_petugas.required' => 'Kolom email harus diisi',
+            'kata_sandi.required' => 'Kolom kata sandi harus diisi',
+            'kata_sandi.min' => 'Kolom kata sandi setidaknya harus 8 karakter',
+        ]);
+
         // Menangkap nilai dari formulir
         $fullname = $request->nama_lengkap;
         $email = $request->email_petugas;
         $password = $request->kata_sandi;
+
+        $penyimpananPhoto = null;
+        if ($request->hasFile('avatar')) {
+            // $namaFile = $request->file('value_dari_attribute_name_di_form')->store('folder_penyimpanan', 'public')
+            $penyimpananPhoto = $request->file('avatar')->store('avatars', 'public');
+        }
 
         // Proses Query ke database
         $success = User::create([
             'fullname' => $fullname,
             'email' => $email,
             'password' => bcrypt($password),
+            'avatar' => $penyimpananPhoto,
         ]);
 
         if ($success) {

@@ -30,22 +30,33 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="fullname">Nama Lengkap</label>
-                  <input type="text" name="nama_lengkap" class="form-control" id="fullname" placeholder="Masukkan Nama Lengkap" required>
+                  <input type="text" name="nama_lengkap" class="form-control" id="fullname" placeholder="Masukkan Nama Lengkap" value="{{ old('nama_lengkap') }}">
+                  @error('nama_lengkap')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" name="email_petugas" class="form-control" id="email" placeholder="Masukkan email" required>
+                  <input type="email" name="email_petugas" class="form-control" id="email" placeholder="Masukkan email" value="{{ old('email_petugas') }}">
+                  @error('email_petugas')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" name="kata_sandi" class="form-control" id="password" placeholder="*********" required>
+                  <input type="password" name="kata_sandi" class="form-control" id="password" placeholder="*********" value="{{ old('kata_sandi') }}">
+                  @error('kata_sandi')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                   <label for="avatar">Foto Petugas</label>
-                  <input type="file" id="avatar" name="avatar" accept="image/*" required>
-
+                  <input type="file" id="avatar" name="avatar" required>
+                  @error('avatar')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                   <p class="help-block">Tambahkan foto petugas ukuran 500 * 200 px</p>
-                </div> --}}
+                </div>
               </div>
               <!-- /.box-body -->
 
