@@ -92,6 +92,38 @@ class PetugasController extends Controller
         }
     }
 
+    public function active_control($id)
+    {
+        $petugas = User::find($id);
+
+        if (empty($petugas)) {
+            abort(404);
+        }
+
+        $petugas->active = !$petugas->active;
+
+        # Variasi 2 logika ganti kebalikan niai:
+        // if ($petugas->active == 1) {
+        //     $petugas->active = 0;
+        // } else {
+        //     $petugas->active = 1;
+        // }
+
+        # Proses update data:
+        $petugas->save();
+
+        return redirect('/petugas');
+
+        // Visualisasi Update data atau nilai dari suatu objek
+        // $obj = (object)[
+        //     'name' => 'John',
+        //     'age' => 60,
+        // ];
+
+        // $obj->age = 20;
+        // $obj->name = 'Junaedi';
+    }
+
     // fungsi untuk menghapus data dari database : ?id=2
     public function delete($petugas_id)
     {

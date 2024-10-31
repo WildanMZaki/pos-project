@@ -64,9 +64,21 @@
                                         <button class="btn btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                        <button class="btn btn-secondary">
-                                            <i class="fa fa-eye-slash"></i>
-                                        </button>
+                                        
+                                        <form action="{{ route('petugas.active_control', $petugas->id) }}" method="post" style="display: inline">
+                                            @csrf
+                                            @method('patch')
+                                            @if ($petugas->active == 1)
+                                                <button class="btn btn-secondary">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </button>
+                                            @else
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </button>
+                                            @endif
+                                            
+                                        </form>
                                         <form action="{{ route('petugas.delete', $petugas->id) }}" method="post" style="display: inline">
                                             @csrf
                                             @method('delete')

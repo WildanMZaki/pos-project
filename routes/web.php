@@ -18,6 +18,7 @@ Route::get('/petugas/test/{name}/{age}', [PetugasController::class, 'test'])->na
 Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.list');
 Route::get('/petugas/buat', [PetugasController::class, 'create'])->name('petugas.create');
 Route::post('/petugas/simpan', [PetugasController::class, 'store'])->name('petugas.store');
+Route::patch('/petugas/active_control/{id}', [PetugasController::class, 'active_control'])->name('petugas.active_control');
 Route::delete('/petugas/{petugas_id}', [PetugasController::class, 'delete'])->name('petugas.delete');
 
 Route::get('/', function () {

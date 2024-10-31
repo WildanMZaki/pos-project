@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                   <label for="avatar">Foto Petugas</label>
-                  <input type="file" id="avatar" name="avatar" required>
+                  <input type="file" id="avatar" name="avatar">
                   @error('avatar')
                       <span class="text-danger">{{ $message }}</span>
                   @enderror
