@@ -61,9 +61,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="btn btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
+                                        <a href="{{ route('petugas.edit', $petugas->id) }}">
+                                            <button class="btn btn-warning">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </a>
                                         
                                         <form action="{{ route('petugas.active_control', $petugas->id) }}" method="post" style="display: inline">
                                             @csrf

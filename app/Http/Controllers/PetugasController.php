@@ -92,6 +92,7 @@ class PetugasController extends Controller
         }
     }
 
+    // fungsi untuk mengatur nilai aktif dan inaktif
     public function active_control($id)
     {
         $petugas = User::find($id);
@@ -122,6 +123,18 @@ class PetugasController extends Controller
 
         // $obj->age = 20;
         // $obj->name = 'Junaedi';
+    }
+
+    public function edit($id)
+    {
+        $petugas = User::find($id);
+
+        if (empty($petugas)) {
+            abort(404);
+        }
+
+        $data['petugas'] = $petugas;
+        return view('menu.petugas.edit', $data);
     }
 
     // fungsi untuk menghapus data dari database : ?id=2
