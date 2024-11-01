@@ -25,8 +25,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('petugas.store') }}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('petugas.update', $petugas->id) }}" method="POST" enctype="multipart/form-data">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="fullname">Nama Lengkap</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PetugasController extends Controller
 {
@@ -32,13 +33,6 @@ class PetugasController extends Controller
         // ];
         $data['list_petugas'] = $list_petugas;
         return view('menu.petugas.index', $data);
-    }
-
-    public function test($name, $age)
-    {
-        echo $name;
-        echo "<br/>";
-        echo $age;
     }
 
     // menampilkan halaman formulir untuk tambah petugas
@@ -137,6 +131,53 @@ class PetugasController extends Controller
         return view('menu.petugas.edit', $data);
     }
 
+    public function update(Request $request, $id)
+    {
+        # Validasi Data
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email_petugas' => 'required|email|min:5',
+            'avatar' => 'mimes:jpg,png,jpeg|max:5000',
+        ], [
+            'nama_lengkap.required' => 'Kolom nama lengkap harus diisi',
+            'nama_lengkap.max' => 'Kolom nama lengkap tidak boleh lebih panjang dari 255 karakter',
+            'email_petugas.required' => 'Kolom email harus diisi',
+        ]);
+
+        # Cari Petugas
+        $petugas = User::find($id);
+
+        if (empty($petugas)) {
+            abort(404);
+        }
+
+        # Proses ganti nilai, dengan menimpa nilai yang ada dengan nilai baru yang diinputkan dari formulir (form)
+        $petugas->fullname = $request->nama_lengkap;
+        $petugas->email = $request->email_petugas;
+
+        $password = $request->kata_sandi;
+        if (!empty($password)) { // Hanya ganti password kalau memang diinputkan dari form-nya
+            $petugas->password = bcrypt($password);
+        }
+
+        if ($request->hasFile('avatar')) { // Hanya ganti ketika ada file dengan key 'avatar' yang diupload
+            $penyimpananPhoto = $request->file('avatar')->store('avatars', 'public');
+            if ($petugas->avatar !== null) {
+                Storage::disk('public')->delete($petugas->avatar);
+            }
+            $petugas->avatar = $penyimpananPhoto;
+        }
+
+        # Proses update ke database
+        $success = $petugas->save();
+
+        if ($success) {
+            return redirect('/petugas');
+        } else {
+            return redirect()->back();
+        }
+    }
+
     // fungsi untuk menghapus data dari database : ?id=2
     public function delete($petugas_id)
     {
@@ -147,6 +188,11 @@ class PetugasController extends Controller
 
         if (empty($petugas)) {
             abort(404);
+        }
+
+        # Hapus foto petugas kalau gak null (artinya pernah ganti poto)
+        if ($petugas->avatar !== null) {
+            Storage::disk('public')->delete($petugas->avatar);
         }
 
         $petugas->delete();

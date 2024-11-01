@@ -23,6 +23,7 @@ Route::get('/petugas/edit/{id}', [PetugasController::class, 'edit'])->name('petu
 // Untuk rute yang berupa proses gunakan selain get
 Route::post('/petugas/simpan', [PetugasController::class, 'store'])->name('petugas.store');
 Route::patch('/petugas/active_control/{id}', [PetugasController::class, 'active_control'])->name('petugas.active_control');
+Route::put('/petugas/update/{id}', [PetugasController::class, 'update'])->name('petugas.update');
 Route::delete('/petugas/{petugas_id}', [PetugasController::class, 'delete'])->name('petugas.delete');
 
 Route::get('/', function () {
