@@ -43,7 +43,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ url('/') }}">
+          <a href="{{ url('/purchases') }}">
             <i class="fa fa-dashboard"></i> <span>Pembelian</span>
           </a>
         </li>

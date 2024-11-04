@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -25,6 +26,11 @@ Route::post('/petugas/simpan', [PetugasController::class, 'store'])->name('petug
 Route::patch('/petugas/active_control/{id}', [PetugasController::class, 'active_control'])->name('petugas.active_control');
 Route::put('/petugas/update/{id}', [PetugasController::class, 'update'])->name('petugas.update');
 Route::delete('/petugas/{petugas_id}', [PetugasController::class, 'delete'])->name('petugas.delete');
+
+# Fitur Transaksi belanja
+Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchases.list');
+Route::get('/purchases/new', [PurchaseController::class, 'create'])->name('purchases.create');
+Route::post('/purchases/save', [PurchaseController::class, 'store'])->name('purchases.store');
 
 Route::get('/', function () {
     return view('welcome');

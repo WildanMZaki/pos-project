@@ -11,4 +11,10 @@ class Product extends Model
 
     // nyambung ke table: products
 
+
+    # merelasikan tabel products ke table purchases
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'product_id');
+    }
 }
