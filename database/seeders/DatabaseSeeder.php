@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->run(BuatUserAdmin::class);
+        $this->run(AdminSeeder::class);
     }
 }
