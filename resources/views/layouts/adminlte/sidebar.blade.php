@@ -5,10 +5,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ auth()->user()->avatar ? asset("storage/" . auth()->user()->avatar) : asset('images/defaults/poto.jpeg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p>{{ auth()->user()->fullname }}</p>
+          {{-- Untuk akses id: auth()->id() --}}
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -37,26 +38,31 @@
             <i class="fa fa-dashboard"></i> <span>Master Produk</span>
           </a>
         </li>
+        @if (auth()->user()->role == 'admin')
+          <li>
+            <a href="{{ route('petugas.list') }}">
+              <i class="fa fa-dashboard"></i> <span>Master Petugas</span>
+            </a>
+          </li>
+        @endif
         <li>
           <a href="{{ url('/') }}">
             <i class="fa fa-dashboard"></i> <span>Katalog Produk</span>
           </a>
         </li>
-        <li>
-          <a href="{{ url('/purchases') }}">
-            <i class="fa fa-dashboard"></i> <span>Pembelian</span>
-          </a>
-        </li>
+        @if (auth()->user()->role == 'admin')
+          <li>
+            <a href="{{ url('/purchases') }}">
+              <i class="fa fa-dashboard"></i> <span>Pembelian</span>
+            </a>
+          </li>
+        @endif
         <li>
           <a href="{{ url('/') }}">
             <i class="fa fa-dashboard"></i> <span>Penjualan</span>
           </a>
         </li>
-        <li>
-          <a href="{{ route('petugas.list') }}">
-            <i class="fa fa-dashboard"></i> <span>Master Petugas</span>
-          </a>
-        </li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->
