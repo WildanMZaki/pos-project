@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EtalaseController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -34,6 +35,8 @@ Route::middleware(IsLoggedIn::class)->group(function () {
         Route::get('/purchases/new', [PurchaseController::class, 'create'])->name('purchases.create');
         Route::post('/purchases/save', [PurchaseController::class, 'store'])->name('purchases.store');
     });
+
+    Route::get('/etalase', [EtalaseController::class, 'index'])->name('etalase');
 
     Route::get('/', function () {
         return view('welcome');

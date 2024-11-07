@@ -46,7 +46,7 @@
           </li>
         @endif
         <li>
-          <a href="{{ url('/') }}">
+          <a href="{{ url('/etalase') }}">
             <i class="fa fa-dashboard"></i> <span>Katalog Produk</span>
           </a>
         </li>
