@@ -58,7 +58,7 @@
           </li>
         @endif
         <li>
-          <a href="{{ url('/') }}">
+          <a href="{{ url('/transaksi') }}">
             <i class="fa fa-dashboard"></i> <span>Penjualan</span>
           </a>
         </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\EtalaseController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsLoggedIn;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::middleware(IsLoggedIn::class)->group(function () {
     });
 
     Route::get('/etalase', [EtalaseController::class, 'index'])->name('etalase');
+    Route::get('/transaksi', [TransactionController::class, 'index'])->name('transactions');
+    Route::get('/transaksi/buat-baru', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::post('/transaksi/simpan-barang', [TransactionController::class, 'store_products'])->name('transactions.store_products');
 
     Route::get('/', function () {
         return view('welcome');
