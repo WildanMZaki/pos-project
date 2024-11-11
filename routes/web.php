@@ -41,6 +41,7 @@ Route::middleware(IsLoggedIn::class)->group(function () {
     Route::get('/transaksi', [TransactionController::class, 'index'])->name('transactions');
     Route::get('/transaksi/buat-baru', [TransactionController::class, 'create'])->name('transactions.create');
     Route::post('/transaksi/simpan-barang', [TransactionController::class, 'store_products'])->name('transactions.store_products');
+    Route::delete('/transaksi/hapus-barang/{product_id}', [TransactionController::class, 'delete_product'])->name('transactions.delete_product');
 
     Route::get('/', function () {
         return view('welcome');

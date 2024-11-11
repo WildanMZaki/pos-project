@@ -52,7 +52,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="row-container">
                             @foreach ($selected_products as $trx_detail)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -60,7 +60,11 @@
                                     <td>{{ $trx_detail->qty }}</td>
                                     <td>{{ $trx_detail->price }}</td>
                                     <td>{{ $trx_detail->qty * $trx_detail->price }}</td>
-                                    <td>-</td>
+                                    <td>
+                                        <button class="btn btn-danger delete-product" data-url="{{ route('transactions.delete_product', $trx_detail->product_id) }}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -136,3 +140,50 @@
     <!-- /.modal-dialog -->
 </div>
 @endsection
+
+@push('js')
+<script>
+    let csrf = '{{ csrf_token(); }}';
+    $(document).on('click', '.delete-product', function () {
+        const deleteUrl = $(this).data('url');
+
+        const confirmed = confirm('Yakin nih hapus produknya?');
+
+        if (confirmed) {
+            $.ajax({
+                url: deleteUrl,
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': csrf,
+                },
+                success: function (response) {
+                    const product_tersisa = response.data.product_tersisa;
+
+                    // Mengosongkan seluruh tabel
+                    $('#row-container').empty();
+
+                    let no = 1;
+                    
+                    product_tersisa.forEach(function (trx_detail) {
+                        $('#row-container').append(`
+                            <tr>
+                                <td>${no}</td>
+                                <td>${trx_detail.product.name}</td>
+                                <td>${trx_detail.qty}</td>
+                                <td>${trx_detail.price}</td>
+                                <td>${trx_detail.qty * trx_detail.price}</td>
+                                <td>
+                                    <button class="btn btn-danger delete-product" data-url="">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `);
+                        no++;
+                    })
+                }
+            })
+        }
+    })
+</script>
+@endpush

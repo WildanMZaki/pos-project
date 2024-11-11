@@ -53,4 +53,26 @@ class TransactionController extends Controller
 
         return redirect('transaksi/buat-baru');
     }
+
+    public function delete_product($product_id)
+    {
+        $productSelected = TransactionDetail::where('product_id', $product_id)->where('user_id', auth()->id())->first();
+
+        if (empty($productSelected)) {
+            return abort(404);
+        }
+
+        // Proses penghapusan
+        $productSelected->delete();
+
+        // Proses pengambilan data ulang
+        $produk_tersisa = TransactionDetail::with(['product'])->whereNull('transaction_id')->where('user_id', auth()->id())->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Produk berhasil dihapus',
+            'data' => [
+                'product_tersisa' => $produk_tersisa,
+            ],
+        ]);
+    }
 }
